@@ -1,5 +1,8 @@
 This was a requirement for Udacity's front-end nanodgree P4: Web Optimization Project.
 
+1st part: Open index.html 
+2nd part: go to views file and click on pizza.html
+
 The following were done to optimize the speed of the pages:
 -compress and optimize image files
 -add async scripts
