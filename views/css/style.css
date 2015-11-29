@@ -29,10 +29,13 @@ form {
   font-weight: 800;
 }
 
+/*Add accelerated CSS*/
 .mover {
   position: fixed;
   width: 256px;
   z-index: -1;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .randomPizzaContainer {
