@@ -406,13 +406,13 @@ var resizePizzas = function(size) {
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
+        document.getElementById("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
+        document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -453,14 +453,13 @@ var resizePizzas = function(size) {
   // Created a local vrailable to save randomPizzaContainer outside the loop
   // Moved the newwidth and dx variables out of the loop
   // Saved the array length
-  function changePizzaSizes(size) {
-    var container = document.getElementsByClassName("randomPizzaContainer");
-    var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-    var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-    for (var i = 0; i < 100; i++) {
-      container[i].style.width=newwidth;
+    function changePizzaSizes(size) {
+        for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
+            var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
+            var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+            document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+        }
     }
-  }
 
   changePizzaSizes(size);
 
@@ -532,27 +531,17 @@ window.addEventListener('scroll', updatePositions);
 // Generates the sliding pizzas when the page loads.
 // Dynamically calculate the number of pizzas using the height property of the screen
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
-  var s = 256;
-  var Toprow = 0;
-  var elem;
-  var movingPizzas = document.getElementById("movingPizzas1")
-  for (var i = 0; i < 200; i++) {
-    Toprow = (Math.floor(i / cols) * s);
-    if (Toprow > window.innerHeight) {
-      break;
-    }
-// Moved var elem outside the loop
-    elem = document.createElement('img');
-    elem.className = 'mover';
-    elem.src = "images/pizza2.png";
-    elem.style.height = "100px";
-    elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
-    elem.style.top = Toprow +'px';
-//Change document.querySelector to document/getElementById
-//Created a local variable called movingPizzas outside the loop
-    movingPizzas.appendChild(elem);
+    var cols = 8;
+    var s = 256;
+    for (var i = 0; i < 200; i++) {
+        var elem = document.createElement('img');
+        elem.className = 'mover';
+        elem.src = "images/pizza2.png";
+        elem.style.height = "100px";
+        elem.style.width = "73.333px";
+        elem.basicLeft = (i % cols) * s;
+        elem.style.top = (Math.floor(i / cols) * s) + 'px';
+        document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
